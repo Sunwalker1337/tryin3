@@ -15,12 +15,12 @@ if(previousTime !== null){
 
 
 
-function getCurrentTimePercentage(currentTime){
+function getCurrentTimeSecond(currentTime){
     console.log(currentTime.seconds);
     localStorage.setItem("videoplayer-current-time", `${currentTime.seconds}`);
 }
 
-player.on('timeupdate', throttle(getCurrentTimePercentage, 1000));
+player.on('timeupdate', throttle(getCurrentTimeSecond, 1000));
 
 
 
