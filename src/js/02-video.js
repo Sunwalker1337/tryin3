@@ -3,17 +3,24 @@ import throttle from 'lodash.throttle';
 
 
 const iframe = document.getElementById('vimeo-player');
-console.log(iframe);
 
-let player = new Vimeo(iframe);
-player.on('play', function() {
-    console.log('played the video!');
-});
 
-player.getVideoTitle().then(function(title) {
-    console.log('title:', title);
-});
+const player = new Vimeo(iframe);
+const throttle = require('lodash.throttle');
+let previousTime = localStorage.getItem("videoplayer-current-time");
 
-var throttle = require('lodash.throttle');
+if(previousTime !== null){
+    player.setCurrentTime(localStorage.getItem("videoplayer-current-time"));
+}
 
-console.log(throttle)
+
+
+function getCurrentTimePercentage(currentTime){
+    console.log(currentTime.seconds);
+    localStorage.setItem("videoplayer-current-time", `${currentTime.seconds}`);
+}
+
+player.on('timeupdate', throttle(getCurrentTimePercentage, 1000));
+
+
+
