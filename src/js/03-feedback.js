@@ -30,7 +30,7 @@ function gatherData (){
 function parseDataOnLoad(){
     let savedSettings = localStorage.getItem("feedback-form-state");
     if (savedSettings !== null){
-        parsedSettings = JSON.parse(savedSettings);
+        let parsedSettings = JSON.parse(savedSettings);
         
         input.value = parsedSettings.email;
         message.value = parsedSettings.message;
